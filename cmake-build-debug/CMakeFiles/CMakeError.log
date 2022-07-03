@@ -1,0 +1,90 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: G:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib\libc.a(lib_a-exit.o): in function `exit':
+exit.c:(.text.exit+0x2c): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: G:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib\libc.a(lib_a-exit.o): in function `exit':
+exit.c:(.text.exit+0x2c): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/mingw64/bin/mingw32-make.exe cmTC_f9ca8/fast && D:/mingw64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_f9ca8.dir\build.make CMakeFiles/cmTC_f9ca8.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f9ca8.dir/testCCompiler.c.obj
+G:\gcc-arm-none-eabi-10.3-2021.10\bin\arm-none-eabi-gcc.exe    -o CMakeFiles\cmTC_f9ca8.dir\testCCompiler.c.obj   -c C:\Users\asus\Desktop\snakegame_mock\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c
+Linking C executable cmTC_f9ca8.exe
+"D:\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_f9ca8.dir\link.txt --verbose=1
+"D:\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\cmTC_f9ca8.dir/objects.a
+D:\mingw64\bin\ar.exe cr CMakeFiles\cmTC_f9ca8.dir/objects.a @CMakeFiles\cmTC_f9ca8.dir\objects1.rsp
+G:\gcc-arm-none-eabi-10.3-2021.10\bin\arm-none-eabi-gcc.exe      -Wl,--whole-archive CMakeFiles\cmTC_f9ca8.dir/objects.a -Wl,--no-whole-archive  -o cmTC_f9ca8.exe -Wl,--out-implib,libcmTC_f9ca8.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: unrecognized option '--major-image-version'
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: use the --help option for usage information
+collect2.exe: error: ld returned 1 exit status
+mingw32-make.exe[1]: *** [CMakeFiles\cmTC_f9ca8.dir\build.make:107: cmTC_f9ca8.exe] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [Makefile:140: cmTC_f9ca8/fast] Error 2
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: G:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib\libc.a(lib_a-exit.o): in function `exit':
+exit.c:(.text.exit+0x2c): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: G:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib\libc.a(lib_a-exit.o): in function `exit':
+exit.c:(.text.exit+0x2c): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/mingw64/bin/mingw32-make.exe cmTC_29b65/fast && D:/mingw64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_29b65.dir\build.make CMakeFiles/cmTC_29b65.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_29b65.dir/testCCompiler.c.obj
+G:\gcc-arm-none-eabi-10.3-2021.10\bin\arm-none-eabi-gcc.exe    -o CMakeFiles\cmTC_29b65.dir\testCCompiler.c.obj   -c C:\Users\asus\Desktop\snakegame_mock\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c
+Linking C executable cmTC_29b65.exe
+"D:\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_29b65.dir\link.txt --verbose=1
+"D:\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\cmTC_29b65.dir/objects.a
+D:\mingw64\bin\ar.exe cr CMakeFiles\cmTC_29b65.dir/objects.a @CMakeFiles\cmTC_29b65.dir\objects1.rsp
+G:\gcc-arm-none-eabi-10.3-2021.10\bin\arm-none-eabi-gcc.exe      -Wl,--whole-archive CMakeFiles\cmTC_29b65.dir/objects.a -Wl,--no-whole-archive  -o cmTC_29b65.exe -Wl,--out-implib,libcmTC_29b65.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: unrecognized option '--major-image-version'
+g:/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: use the --help option for usage information
+collect2.exe: error: ld returned 1 exit status
+mingw32-make.exe[1]: *** [CMakeFiles\cmTC_29b65.dir\build.make:107: cmTC_29b65.exe] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [Makefile:140: cmTC_29b65/fast] Error 2
+
+
+

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="snakegame_mock"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="snakegame_mock">
+				<Option output="C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/snakegame_mock.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock"/>
+					<Add directory="C:/Users/asus/Desktop/pdcurses_tutorial"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="D:\mingw64\include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 snakegame_mock"/>
+					<CompileFile command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="snakegame_mock/fast">
+				<Option output="C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/snakegame_mock.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock"/>
+					<Add directory="C:/Users/asus/Desktop/pdcurses_tutorial"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="D:\mingw64\include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 snakegame_mock/fast"/>
+					<CompileFile command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/game.cpp">
+			<Option target="snakegame_mock"/>
+		</Unit>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/game.h">
+			<Option target="snakegame_mock"/>
+		</Unit>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/main.cpp">
+			<Option target="snakegame_mock"/>
+		</Unit>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/snake.cpp">
+			<Option target="snakegame_mock"/>
+		</Unit>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/snake.h">
+			<Option target="snakegame_mock"/>
+		</Unit>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

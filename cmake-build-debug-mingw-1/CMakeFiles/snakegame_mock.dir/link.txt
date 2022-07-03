@@ -1,0 +1,3 @@
+"D:\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\snakegame_mock.dir/objects.a
+D:\mingw64\bin\ar.exe cr CMakeFiles\snakegame_mock.dir/objects.a @CMakeFiles\snakegame_mock.dir\objects1.rsp
+D:\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\snakegame_mock.dir/objects.a -Wl,--no-whole-archive  -o snakegame_mock.exe -Wl,--out-implib,libsnakegame_mock.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\snakegame_mock.dir\linklibs.rsp
