@@ -230,8 +230,13 @@ void Game::initializeGame()
     // allocate memory for a new snake
     //this->mPtrSnake.reset(new Snake(this->mGameBoardWidth, this->mGameBoardHeight, this->mInitialSnakeLength));
     //TODO::implement multiple player mode
-    snakes.push_back(new Snake(mGameBoardWidth, mGameBoardHeight, mInitialSnakeLength));
+    mPoints[0] = 0; mPoints[1] = 0; mPoints[2] = 0;
+    mDifficulty = 0;
 
+    snakes.clear();
+    foods.clear();
+
+    snakes.push_back(new Snake(mGameBoardWidth, mGameBoardHeight, mInitialSnakeLength));
     foods.push_back(createRamdonFood());
 
 }
@@ -373,6 +378,8 @@ void Game::runGame()
         _sleep(mDelay);
 
         refresh();
+
+        if(snakes[0]->state == false) break;
     }
 }
 
