@@ -11,7 +11,9 @@ add_executable(snakegame_mock
         snake_src_mock/game.h
         snake_src_mock/main.cpp
         snake_src_mock/snake.cpp
-        snake_src_mock/snake.h)
+        snake_src_mock/snake.h
+        snake_src_mock/Food.cpp
+        snake_src_mock/Food.h)
 
 target_link_libraries(snakegame_mock
         pdcurses.lib

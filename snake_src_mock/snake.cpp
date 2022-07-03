@@ -15,6 +15,11 @@ SnakeBody::SnakeBody(int x, int y): mX(x), mY(y)
 {
 }
 
+SnakeBody::SnakeBody(const SnakeBody& s){
+    mX = s.getX();
+    mY = s.getY();
+}
+
 int SnakeBody::getX() const
 {
     return mX;
@@ -60,9 +65,9 @@ bool Snake::isPartOfSnake(int x, int y)
 {
     SnakeBody temp(x, y);
     for(SnakeBody& body: mSnake){
-        if(!(body == temp)) return false;
+        if(body == temp) return true;
     }
-    return true;
+    return false;
 }
 
 /*
@@ -81,34 +86,20 @@ bool Snake::hitWall()
  */
 bool Snake::hitSelf()
 {
-		// TODO check if the snake has hit itself.
-
-    
-
-
-
-
-
-		return false;
+    for(int i = 1; i < mSnake.size(); i++){
+        if(mSnake[i] == mSnake[0]) return true;
+    }
+    return false;
 }
 
-
-bool Snake::touchFood()
+bool Snake::hitOthers(Snake* s)
 {
-    SnakeBody newHead = this->createNewHead();
-    if (this->mFood == newHead)
-    {
-        return true;
+    if(s == this) return false;
+    std::vector<SnakeBody>& snake = s->getSnake();
+    for(int i = 0; i < mSnake.size(); i++){
+        if(mSnake[i] == snake[0]) return true;
     }
-    else
-    {
-        return false;
-    }
-}
-
-void Snake::senseFood(SnakeBody food)
-{
-    this->mFood = food;
+    return false;
 }
 
 std::vector<SnakeBody>& Snake::getSnake()
@@ -118,112 +109,36 @@ std::vector<SnakeBody>& Snake::getSnake()
 
 bool Snake::changeDirection(Direction newDirection)
 {
-    switch (this->mDirection)
-    {
-        case Direction::Up:
-        {
-						// what you need to do when the current direction of the snake is Up
-						// and the user inputs a new direction?  TODO
-
-
-
-
-
-
-
-        }
-        case Direction::Down:
-        {
-						// what you need to do when the current direction of the snake is Down
-						// and the user inputs a new direction? TODO
-
-
-
-
-
-
-
-        }
-        case Direction::Left:
-        {
-						// what you need to do when the current direction of the snake is Left
-						// and the user inputs a new direction? TODO
-
-
-
-
-
-
-
-        }
-        case Direction::Right:
-        {
-						// what you need to do when the current direction of the snake is Right
-						// and the user inputs a new direction? TODO
-
-
-
-
-
-
-
-            
-        }
+    if((mDirection == Direction::Up && newDirection == Direction::Down) || (mDirection == Direction::Down && newDirection == Direction::Up)
+    || (mDirection == Direction::Left && newDirection == Direction::Right) || (mDirection == Direction::Right && newDirection == Direction::Left)){
+        return false;
     }
-
-    return false;
+    mDirection = newDirection;
+    return true;
 }
 
 
 SnakeBody Snake::createNewHead()
 {
-		/* TODO
-		 * read the position of the current head
-		 * read the current heading direction 
-		 * add the new head according to the direction
-		 * return the new snake
-		 */
-
-
-
-
-
-
-    SnakeBody newHead = this->mSnake[0];
+    const SnakeBody& oriHead = mSnake[0];
+    int x = oriHead.getX(), y = oriHead.getY();
+    int moveDist = 1;
+    switch (mDirection) {
+        case Direction::Up: y -= moveDist; break;
+        case Direction::Down: y += moveDist; break;
+        case Direction::Left: x -= moveDist; break;
+        case Direction::Right: x += moveDist; break;
+        default: break;
+    }
+    SnakeBody newHead(x, y);
+    mSnake.insert(mSnake.begin(), newHead);
     return newHead;
 }
 
-/*
- * If eat food, return true, otherwise return false
- */
-bool Snake::moveFoward()
-{
-    /* 
-		 * TODO 
-		 * move the snake forward. 
-     * If eat food, return true, otherwise return false
-     */
-
-
-
-
-
-
-
-
-    return false;
-}
-
-bool Snake::checkCollision()
-{
-    if (this->hitWall() || this->hitSelf())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+bool Snake::deleteTail(){
+    if(mSnake.size() <= 1) return false;
+    mSnake.pop_back();
+    return true;
 }
 
 

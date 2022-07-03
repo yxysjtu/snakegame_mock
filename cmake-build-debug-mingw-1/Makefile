@@ -142,6 +142,33 @@ snakegame_mock/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\snakegame_mock.dir\build.make CMakeFiles/snakegame_mock.dir/build
 .PHONY : snakegame_mock/fast
 
+snake_src_mock/Food.obj: snake_src_mock/Food.cpp.obj
+
+.PHONY : snake_src_mock/Food.obj
+
+# target to build an object file
+snake_src_mock/Food.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\snakegame_mock.dir\build.make CMakeFiles/snakegame_mock.dir/snake_src_mock/Food.cpp.obj
+.PHONY : snake_src_mock/Food.cpp.obj
+
+snake_src_mock/Food.i: snake_src_mock/Food.cpp.i
+
+.PHONY : snake_src_mock/Food.i
+
+# target to preprocess a source file
+snake_src_mock/Food.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\snakegame_mock.dir\build.make CMakeFiles/snakegame_mock.dir/snake_src_mock/Food.cpp.i
+.PHONY : snake_src_mock/Food.cpp.i
+
+snake_src_mock/Food.s: snake_src_mock/Food.cpp.s
+
+.PHONY : snake_src_mock/Food.s
+
+# target to generate assembly for a file
+snake_src_mock/Food.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\snakegame_mock.dir\build.make CMakeFiles/snakegame_mock.dir/snake_src_mock/Food.cpp.s
+.PHONY : snake_src_mock/Food.cpp.s
+
 snake_src_mock/game.obj: snake_src_mock/game.cpp.obj
 
 .PHONY : snake_src_mock/game.obj
@@ -232,6 +259,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... snakegame_mock
+	@echo ... snake_src_mock/Food.obj
+	@echo ... snake_src_mock/Food.i
+	@echo ... snake_src_mock/Food.s
 	@echo ... snake_src_mock/game.obj
 	@echo ... snake_src_mock/game.i
 	@echo ... snake_src_mock/game.s

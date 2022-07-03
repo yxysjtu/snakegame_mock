@@ -16,6 +16,7 @@ class SnakeBody
 public:
     SnakeBody();
     SnakeBody(int x, int y);
+    SnakeBody(const SnakeBody& s);
     int getX() const;
     int getY() const;
     bool operator== (const SnakeBody& snakeBody);
@@ -28,6 +29,8 @@ private:
 class Snake
 {
 public:
+    bool state = true; //true:alive; false:dead
+
     //Snake();
     Snake(int gameBoardWidth, int gameBoardHeight, int initialSnakeLength);
     // Set random seed
@@ -36,18 +39,17 @@ public:
     void initializeSnake();
     // Checking API for generating random food
     bool isPartOfSnake(int x, int y);
-    void senseFood(SnakeBody food);
-    bool touchFood();
+
     // Check if the snake is dead
     bool hitWall();
     bool hitSelf();
-    bool checkCollision();
+    bool hitOthers(Snake* s);
 
     bool changeDirection(Direction newDirection);
     std::vector<SnakeBody>& getSnake();
     int getLength();
     SnakeBody createNewHead();
-    bool moveFoward();
+    bool deleteTail();
 
 private:
     const int mGameBoardWidth;
@@ -55,8 +57,9 @@ private:
     // Snake information
     const int mInitialSnakeLength;
     Direction mDirection;
-    SnakeBody mFood;
     std::vector<SnakeBody> mSnake;
+    int speed = 1;
+
 };
 
 #endif

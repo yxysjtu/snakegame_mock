@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/snakegame_mock.dir/snake_src_mock/Food.cpp.obj"
   "CMakeFiles/snakegame_mock.dir/snake_src_mock/game.cpp.obj"
   "CMakeFiles/snakegame_mock.dir/snake_src_mock/main.cpp.obj"
   "CMakeFiles/snakegame_mock.dir/snake_src_mock/snake.cpp.obj"

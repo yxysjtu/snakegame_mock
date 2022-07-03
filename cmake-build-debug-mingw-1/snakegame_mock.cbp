@@ -86,6 +86,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/Food.cpp">
+			<Option target="snakegame_mock"/>
+		</Unit>
+		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/Food.h">
+			<Option target="snakegame_mock"/>
+		</Unit>
 		<Unit filename="C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/game.cpp">
 			<Option target="snakegame_mock"/>
 		</Unit>

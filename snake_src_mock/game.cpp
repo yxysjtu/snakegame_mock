@@ -11,6 +11,12 @@
 
 #include "game.h"
 
+//color considerations
+#define FOOD_COLOR 0
+#define SNAKE1_COLOR 1
+#define SNAKE2_COLOR 2
+#define SNAKE3_COLOR 3
+
 Game::Game()
 {
     // Separate the screen to three windows
@@ -35,10 +41,23 @@ Game::Game()
 
     // Initialize the leader board to be all zeros
     this->mLeaderBoard.assign(this->mNumLeaders, 0);
+
+    //color setting
+    if (has_colors() == FALSE) {
+        endwin();
+        printf("Your terminal does not support color\n");
+        exit(1);
+    }
+    start_color();
+    init_pair(FOOD_COLOR, COLOR_WHITE, COLOR_YELLOW);
+    init_pair(SNAKE1_COLOR, COLOR_WHITE, COLOR_BLUE);
+    init_pair(SNAKE2_COLOR, COLOR_WHITE, COLOR_GREEN);
+    init_pair(SNAKE3_COLOR, COLOR_WHITE, COLOR_RED);
 }
 
 Game::~Game()
 {
+    //TODO::safe delete snake
     for (int i = 0; i < this->mWindows.size(); i ++)
     {
         delwin(this->mWindows[i]);
@@ -132,7 +151,7 @@ bool Game::renderRestartMenu() const
     int index = 0;
     int offset = 4;
     mvwprintw(menu, 1, 1, "Your Final Score:");
-    std::string pointString = std::to_string(this->mPoints);
+    std::string pointString = std::to_string(this->mPoints[0]);
     mvwprintw(menu, 2, 1, pointString.c_str());
     wattron(menu, A_STANDOUT);
     mvwprintw(menu, 0 + offset, 1, menuItems[0].c_str());
@@ -194,7 +213,7 @@ bool Game::renderRestartMenu() const
 
 void Game::renderPoints() const
 {
-    std::string pointString = std::to_string(this->mPoints);
+    std::string pointString = std::to_string(this->mPoints[0]);
     mvwprintw(this->mWindows[2], 12, 1, pointString.c_str());
     wrefresh(this->mWindows[2]);
 }
@@ -209,37 +228,55 @@ void Game::renderDifficulty() const
 void Game::initializeGame()
 {
     // allocate memory for a new snake
-		this->mPtrSnake.reset(new Snake(this->mGameBoardWidth, this->mGameBoardHeight, this->mInitialSnakeLength));
+    //this->mPtrSnake.reset(new Snake(this->mGameBoardWidth, this->mGameBoardHeight, this->mInitialSnakeLength));
+    //TODO::implement multiple player mode
+    snakes.push_back(new Snake(mGameBoardWidth, mGameBoardHeight, mInitialSnakeLength));
 
-    /* TODO 
-     * initialize the game pionts as zero
-     * create a food at randome place
-     * make the snake aware of the food
-     * other initializations
-     */
+    foods.push_back(createRamdonFood());
+
 }
 
-void Game::createRamdonFood()
+bool Game::checkCollision(int x, int y) {
+    for(Snake* snake : snakes){
+        if(snake->isPartOfSnake(x, y)) return true;
+    }
+    return false;
+}
+
+Food Game::createRamdonFood()
 {
-/* TODO 
- * create a food at random places
- * make sure that the food doesn't overlap with the snake.
- */
+    //generate random position
+    int x = rand() % mGameBoardWidth;
+    int y = rand() % mGameBoardHeight;
+    while(checkCollision(x, y)){
+        x = rand() % mGameBoardWidth;
+        y = rand() % mGameBoardHeight;
+    }
+    return Food(x, y);
 }
 
 void Game::renderFood() const
 {
-    mvwaddch(this->mWindows[1], this->mFood.getY(), this->mFood.getX(), this->mFoodSymbol);
+    attron(COLOR_PAIR(FOOD_COLOR));
+    for(const Food& food: foods){
+        mvwaddch(this->mWindows[1], food.getY(), food.getX(), this->mFoodSymbol);
+    }
+    attroff(COLOR_PAIR(FOOD_COLOR));
     wrefresh(this->mWindows[1]);
 }
 
 void Game::renderSnake() const
 {
-    int snakeLength = this->mPtrSnake->getLength();
-    std::vector<SnakeBody>& snake = this->mPtrSnake->getSnake();
-    for (int i = 0; i < snakeLength; i ++)
-    {
-        mvwaddch(this->mWindows[1], snake[i].getY(), snake[i].getX(), this->mSnakeSymbol);
+    for(int s = 0; s < snakes.size(); s++){
+        if(snakes[s]->state){
+            int snakeLength = snakes[s]->getLength();
+            std::vector<SnakeBody>& snake = snakes[s]->getSnake();
+            attron(COLOR_PAIR(s + 1));
+            for (int i = 0; i < snakeLength; i ++){
+                mvwaddch(this->mWindows[1], snake[i].getY(), snake[i].getX(), this->mSnakeSymbol);
+            }
+            attroff(COLOR_PAIR(s + 1));
+        }
     }
     wrefresh(this->mWindows[1]);
 }
@@ -253,75 +290,24 @@ void Game::controlSnake() const
         case 'W':
         case 'w':
         case KEY_UP:
-        {
-				    // TODO change the direction of the snake.
-
-
-
-
-
-
-
-
-
-
+            snakes[0]->changeDirection(Direction::Up);
             break;
-        }
         case 'S':
         case 's':
         case KEY_DOWN:
-        {
-				    // TODO change the direction of the snake.
-
-
-
-
-
-
-
-
-
-
+            snakes[0]->changeDirection(Direction::Down);
             break;
-        }
         case 'A':
         case 'a':
         case KEY_LEFT:
-        {
-				    // TODO change the direction of the snake.
-
-
-
-
-
-
-
-
-
-
+            snakes[0]->changeDirection(Direction::Left);
             break;
-        }
         case 'D':
         case 'd':
         case KEY_RIGHT:
-        {
-				    // TODO change the direction of the snake.
-
-
-
-
-
-
-
-
-
-
+            snakes[0]->changeDirection(Direction::Right);
             break;
-        }
-        default:
-        {
-            break;
-        }
+        default: break;
     }
 }
 
@@ -345,8 +331,8 @@ void Game::renderBoards() const
 
 void Game::adjustDelay()
 {
-    this->mDifficulty = this->mPoints / 5;
-    if (mPoints % 5 == 0)
+    this->mDifficulty = this->mPoints[0] / 5;
+    if (mPoints[0] % 5 == 0)
     {
         this->mDelay = this->mBaseDelay * pow(0.75, this->mDifficulty);
     }
@@ -354,38 +340,37 @@ void Game::adjustDelay()
 
 void Game::runGame()
 {
-    bool moveSuccess;
-    int key;
+
     while (true)
     {
-				/* TODO 
-				 * this is the main control loop of the game.
-				 * it keeps running a while loop, and does the following things:
-				 * 	1. process your keyboard input
-				 * 	2. clear the window
-				 * 	3. move the current snake forward
-				 * 	4. check if the snake has eaten the food after movement
-				 * 	5. check if the snake dies after the movement
-				 * 	6. make corresponding steps for the ``if conditions'' in 3 and 4.
-				 *   7. render the position of the food and snake in the new frame of window. 
-				 *   8. update other game states and refresh the window
-				 */
+        /* TODO
+         * this is the main control loop of the game.
+         * it keeps running a while loop, and does the following things:
+         * 	1. process your keyboard input
+         * 	2. clear the window
+         * 	3. move the current snake forward
+         * 	4. check if the snake has eaten the food after movement
+         * 	5. check if the snake dies after the movement
+         * 	6. make corresponding steps for the ``if conditions'' in 3 and 4.
+         *   7. render the position of the food and snake in the new frame of window.
+         *   8. update other game states and refresh the window
+         */
         this->controlSnake();
-        
+        werase(mWindows[1]);
 
+        //TODO::get other snakes' information via server
+        moveSnakes();
 
-				
+        this->renderSnake();
+        this->renderFood();
 
+        adjustDelay();
+        renderPoints();
+        renderDifficulty();
 
-				this->renderSnake();
-
-        
-
-
-
-
-
-				std::this_thread::sleep_for(std::chrono::milliseconds(this->mDelay));
+        //TODO::there's seems a problem with the delay function
+        //std::this_thread::sleep_for(std::chrono::milliseconds(this->mDelay));
+        _sleep(mDelay);
 
         refresh();
     }
@@ -434,10 +419,10 @@ bool Game::readLeaderBoard()
 bool Game::updateLeaderBoard()
 {
     bool updated = false;
-    int newScore = this->mPoints;
+    int newScore = this->mPoints[0];
     for (int i = 0; i < this->mNumLeaders; i ++)
     {
-        if (this->mLeaderBoard[i] >= this->mPoints)
+        if (this->mLeaderBoard[i] >= this->mPoints[0])
         {
             continue;
         }
@@ -463,6 +448,38 @@ bool Game::writeLeaderBoard()
     }
     fhand.close();
     return true;
+}
+
+bool Game::checkEatFood(int x, int y) {
+    for(int i = 0; i < foods.size(); i++){
+        if(foods[i].getX() == x && foods[i].getY() == y){
+            foods[i] = createRamdonFood();
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Game::checkSnakeCollision(Snake* snake) {
+    if (snake->hitWall() || snake->hitSelf()) return true;
+    for(Snake* s: snakes){
+        if(s->state && snake->hitOthers(s)) return true;
+    }
+    return false;
+}
+
+void Game::moveSnakes() {
+    for(int i = 0; i < snakes.size(); i++){
+        if(snakes[i]->state){ //alive
+            SnakeBody head = snakes[i]->createNewHead();
+            if(checkEatFood(head.getX(), head.getY())){
+                mPoints[i]++;
+            }else{
+                snakes[i]->deleteTail();
+            }
+            if(checkSnakeCollision(snakes[i])) snakes[i]->state = false;
+        }
+    }
 }
 
 

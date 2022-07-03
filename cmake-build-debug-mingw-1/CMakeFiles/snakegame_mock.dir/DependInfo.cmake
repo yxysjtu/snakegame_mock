@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/Food.cpp" "C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/CMakeFiles/snakegame_mock.dir/snake_src_mock/Food.cpp.obj"
   "C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/game.cpp" "C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/CMakeFiles/snakegame_mock.dir/snake_src_mock/game.cpp.obj"
   "C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/main.cpp" "C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/CMakeFiles/snakegame_mock.dir/snake_src_mock/main.cpp.obj"
   "C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/snake.cpp" "C:/Users/asus/Desktop/snakegame_mock/cmake-build-debug-mingw-1/CMakeFiles/snakegame_mock.dir/snake_src_mock/snake.cpp.obj"
