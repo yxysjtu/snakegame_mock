@@ -15,7 +15,8 @@ class Game
 public:
     Game();
     ~Game();
-    
+
+    //画界面类
     void createInformationBoard();
     void renderInformationBoard() const;
 
@@ -33,25 +34,29 @@ public:
     void renderLeaderBoard() const;
     
     void renderBoards() const;
-
-    void initializeGame();
-    void runGame();
     void renderPoints() const;
     void renderDifficulty() const;
-    
-    Food createRamdonFood();
+
+    bool renderRestartMenu() const;
+
     void renderFood() const;
     void renderSnake() const;
-    void controlSnake() const;
-    
+
+    //游戏运行handle，绘制界面，运行，接受键鼠输入
     void startGame();
-    bool renderRestartMenu() const;
-    void adjustDelay();
+    void initializeGame();
+    void runGame();
+    void controlSnake() const;
+
+    //裁判类
+    Food createRamdonFood();
+    void moveSnakes();
+    bool checkEatFood(int x, int y); //input:snake head
+    bool checkSnakeCollision(Snake* s);
+
+    void adjustDelay(); //这个函数在多玩家可能会有冲突
 
 private:
-    // We need to have two windows
-    // One is for game introduction
-    // One is for game mWindows
     int mScreenWidth;
     int mScreenHeight;
     int mGameBoardWidth;
@@ -78,11 +83,6 @@ private:
     const int mNumLeaders = 3;
 
     bool checkCollision(int x, int y);//for generate food
-    bool checkEatFood(int x, int y); //input:snake head
-    bool checkSnakeCollision(Snake* s);
-
-    void moveSnakes();
-
 };
 
 #endif

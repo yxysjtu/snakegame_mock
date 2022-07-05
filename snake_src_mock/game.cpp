@@ -348,18 +348,6 @@ void Game::runGame()
 
     while (true)
     {
-        /* TODO
-         * this is the main control loop of the game.
-         * it keeps running a while loop, and does the following things:
-         * 	1. process your keyboard input
-         * 	2. clear the window
-         * 	3. move the current snake forward
-         * 	4. check if the snake has eaten the food after movement
-         * 	5. check if the snake dies after the movement
-         * 	6. make corresponding steps for the ``if conditions'' in 3 and 4.
-         *   7. render the position of the food and snake in the new frame of window.
-         *   8. update other game states and refresh the window
-         */
         this->controlSnake();
         werase(mWindows[1]);
 

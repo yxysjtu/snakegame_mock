@@ -35,9 +35,8 @@ public:
     Snake(int gameBoardWidth, int gameBoardHeight, int initialSnakeLength);
     // Set random seed
     void setRandomSeed();
-    // Initialize snake
     void initializeSnake();
-    // Checking API for generating random food
+
     bool isPartOfSnake(int x, int y);
 
     // Check if the snake is dead
@@ -46,8 +45,10 @@ public:
     bool hitOthers(Snake* s);
 
     bool changeDirection(Direction newDirection);
+
     std::vector<SnakeBody>& getSnake();
     int getLength();
+
     SnakeBody createNewHead();
     bool deleteTail();
 
@@ -58,6 +59,7 @@ private:
     const int mInitialSnakeLength;
     Direction mDirection;
     std::vector<SnakeBody> mSnake;
+
     int speed = 1;
 
 };
