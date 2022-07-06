@@ -9,10 +9,17 @@
 #include "snake.h"
 #include "food.h"
 
+enum Mode{
+    normal,
+    maze,
+    interactive
+};
 
 class Game
 {
 public:
+    Mode mode = interactive;
+
     Game();
     ~Game();
 
@@ -47,6 +54,7 @@ public:
     void initializeGame();
     void runGame();
     void controlSnake() const;
+    void autoControlSnake(Snake* snake);
 
     //裁判类
     Food createRamdonFood();
@@ -83,6 +91,7 @@ private:
     const int mNumLeaders = 3;
 
     bool checkCollision(int x, int y);//for generate food
+    bool checkFoodCollision(int x, int y); //for generate food
 };
 
 #endif

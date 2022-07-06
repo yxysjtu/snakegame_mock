@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
-#include <cmath> 
+#include <cmath>
+#include <algorithm>
 
 // For terminal delay
 #include <chrono>
@@ -236,14 +237,39 @@ void Game::initializeGame()
     snakes.clear();
     foods.clear();
 
-    snakes.push_back(new Snake(mGameBoardWidth, mGameBoardHeight, mInitialSnakeLength));
-    foods.push_back(createRamdonFood());
+    switch (mode) {
+        case normal: {
+            snakes.push_back(new Snake(mGameBoardWidth / 2, mGameBoardHeight / 2, mInitialSnakeLength));
+            foods.push_back(createRamdonFood());
+        } break;
+        case maze:{
+            //TODO
+        } break;
+        case interactive:{
+            snakes.push_back(new Snake(mGameBoardWidth / 2, mGameBoardHeight / 2, mInitialSnakeLength));
+            int snakenum = 5;
+            for(int i = 0; i < snakenum; i++){
+                Food pos = createRamdonFood();
+                snakes.push_back(new Snake(pos.getX(), pos.getY(), mInitialSnakeLength));
+            }
+            int foodnum = 5;
+            for(int i = 0; i < foodnum; i++) foods.push_back(createRamdonFood());
+        }
+
+    }
 
 }
 
 bool Game::checkCollision(int x, int y) {
+    if(x <= 0 || y <= 0 || x >= mGameBoardWidth || y >= mGameBoardHeight) return true; //边界
     for(Snake* snake : snakes){
         if(snake->isPartOfSnake(x, y)) return true;
+    }
+    return false;
+}
+bool Game::checkFoodCollision(int x, int y){
+    for(Food& f : foods){
+        if(x == f.getX() && y == f.getY()) return true;
     }
     return false;
 }
@@ -253,7 +279,7 @@ Food Game::createRamdonFood()
     //generate random position
     int x = rand() % mGameBoardWidth;
     int y = rand() % mGameBoardHeight;
-    while(checkCollision(x, y)){
+    while(checkCollision(x, y) || checkFoodCollision(x, y)){
         x = rand() % mGameBoardWidth;
         y = rand() % mGameBoardHeight;
     }
@@ -278,7 +304,8 @@ void Game::renderSnake() const
             std::vector<SnakeBody>& snake = snakes[s]->getSnake();
             attron(COLOR_PAIR(s + 1));
             for (int i = 0; i < snakeLength; i ++){
-                mvwaddch(this->mWindows[1], snake[i].getY(), snake[i].getX(), this->mSnakeSymbol);
+                if(s == 0) mvwaddch(this->mWindows[1], snake[i].getY(), snake[i].getX(), 'O');
+                else mvwaddch(this->mWindows[1], snake[i].getY(), snake[i].getX(), this->mSnakeSymbol);
             }
             attroff(COLOR_PAIR(s + 1));
         }
@@ -346,16 +373,30 @@ void Game::adjustDelay()
 void Game::runGame()
 {
 
-    while (true)
-    {
-        this->controlSnake();
+    while (true){
+        //control part
+        switch (mode) {
+            case normal:{
+                controlSnake();
+            }break;
+            case maze:{
+                //TODO:
+            }break;
+            case interactive:{
+                controlSnake();
+                for(int i = 1; i < snakes.size(); i++){
+                    autoControlSnake(snakes[i]);
+                }
+            }
+        }
+
         werase(mWindows[1]);
 
         //TODO::get other snakes' information via server
-        moveSnakes();
+        moveSnakes(); //move and check collision
 
-        this->renderSnake();
-        this->renderFood();
+        renderSnake();
+        renderFood();
 
         adjustDelay();
         renderPoints();
@@ -456,9 +497,17 @@ bool Game::checkEatFood(int x, int y) {
 }
 
 bool Game::checkSnakeCollision(Snake* snake) {
-    if (snake->hitWall() || snake->hitSelf()) return true;
-    for(Snake* s: snakes){
-        if(s->state && snake->hitOthers(s)) return true;
+    std::vector<SnakeBody>& s = snake->getSnake();
+    int x = s[0].getX(), y = s[0].getY();
+    //hit wall
+    if(x <= 0 || x >= mGameBoardWidth || y <= 0 || y >= mGameBoardHeight) return true;
+    //hit self
+    for(int i = 1; i < s.size(); i++){
+        if(s[0] == s[i]) return true;
+    }
+    //hit other snakes
+    for(Snake* other: snakes){
+        if(other != snake && other->state == true && other->isPartOfSnake(x, y)) return true;
     }
     return false;
 }
@@ -472,9 +521,89 @@ void Game::moveSnakes() {
             }else{
                 snakes[i]->deleteTail();
             }
-            if(checkSnakeCollision(snakes[i])) snakes[i]->state = false;
+            if(checkSnakeCollision(snakes[i])){
+                snakes[i]->state = false;
+                //死去躯体变为食物
+                for(SnakeBody& s : snakes[i]->getSnake()){
+                    foods.push_back(Food(s.getX(), s.getY()));
+                }
+            }
         }
     }
+}
+
+void Game::autoControlSnake(Snake *snake) {
+    Direction dir = snake->getDirection();
+    int x = snake->getSnake()[0].getX(), y = snake->getSnake()[0].getY();
+    bool flag = false;
+    //TODO 食物距离排序
+    sort(foods.begin(), foods.end(), [x,y](Food& f1, Food& f2)->bool{return abs(f1.getX()-x)+abs(f1.getY()-y)<abs(f2.getX()-x)+abs(f2.getY()-y);});
+    for(int i = 0; i < foods.size() && !flag; i++){
+        int fx = foods[i].getX(), fy = foods[i].getY();
+        switch (snake->getDirection()) {
+            case Direction::Down: {
+                if(checkCollision(x, y + 1) || fy <= y){
+                    if(fx < x){
+                        if(!checkCollision(x - 1, y)){
+                            dir = Direction::Left;
+                            flag = true;
+                        }
+                    }else{
+                        if(!checkCollision(x + 1, y)){
+                            dir = Direction::Right;
+                            flag = true;
+                        }
+                    }
+                }else flag = true;
+            } break;
+            case Direction::Up: {
+                if(checkCollision(x, y - 1) || fy >= y){
+                    if(fx < x){
+                        if(!checkCollision(x - 1, y)){
+                            dir = Direction::Left;
+                            flag = true;
+                        }
+                    }else{
+                        if(!checkCollision(x + 1, y)){
+                            dir = Direction::Right;
+                            flag = true;
+                        }
+                    }
+                }else flag = true;
+            } break;
+            case Direction::Left: {
+                if(checkCollision(x - 1, y) || fx >= x){
+                    if(fy < y){
+                        if(!checkCollision(x, y - 1)){
+                            dir = Direction::Up;
+                            flag = true;
+                        }
+                    }else{
+                        if(!checkCollision(x, y + 1)){
+                            dir = Direction::Down;
+                            flag = true;
+                        }
+                    }
+                }else flag = true;
+            } break;
+            case Direction::Right: {
+                if(checkCollision(x + 1, y) || fx <= x){
+                    if(fy < y){
+                        if(!checkCollision(x, y - 1)){
+                            dir = Direction::Up;
+                            flag = true;
+                        }
+                    }else{
+                        if(!checkCollision(x, y + 1)){
+                            dir = Direction::Down;
+                            flag = true;
+                        }
+                    }
+                }else flag = true;
+            } break;
+        }
+    }
+    snake->changeDirection(dir);
 }
 
 

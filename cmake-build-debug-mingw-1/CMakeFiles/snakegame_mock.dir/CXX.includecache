@@ -27,6 +27,8 @@ iostream
 -
 cmath
 -
+algorithm
+-
 chrono
 -
 thread
@@ -51,10 +53,6 @@ snake.h
 C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/snake.h
 food.h
 C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/Food.h
-
-C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/main.cpp
-game.h
-C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/game.h
 
 C:/Users/asus/Desktop/snakegame_mock/snake_src_mock/snake.h
 vector

@@ -32,29 +32,20 @@ public:
     bool state = true; //true:alive; false:dead
 
     //Snake();
-    Snake(int gameBoardWidth, int gameBoardHeight, int initialSnakeLength);
-    // Set random seed
-    void setRandomSeed();
-    void initializeSnake();
+    Snake(int x, int y, int initialSnakeLength);
 
     bool isPartOfSnake(int x, int y);
-
-    // Check if the snake is dead
-    bool hitWall();
-    bool hitSelf();
-    bool hitOthers(Snake* s);
 
     bool changeDirection(Direction newDirection);
 
     std::vector<SnakeBody>& getSnake();
     int getLength();
+    inline Direction getDirection() { return mDirection; }
 
     SnakeBody createNewHead();
     bool deleteTail();
 
 private:
-    const int mGameBoardWidth;
-    const int mGameBoardHeight;
     // Snake information
     const int mInitialSnakeLength;
     Direction mDirection;

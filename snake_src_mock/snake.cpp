@@ -35,69 +35,23 @@ bool SnakeBody::operator== (const SnakeBody& snakeBody)
 	return mX == snakeBody.mX && mY == snakeBody.mY;
 }
 
-Snake::Snake(int gameBoardWidth, int gameBoardHeight, int initialSnakeLength): mGameBoardWidth(gameBoardWidth), mGameBoardHeight(gameBoardHeight), mInitialSnakeLength(initialSnakeLength)
+Snake::Snake(int x, int y, int initialSnakeLength): mInitialSnakeLength(initialSnakeLength)
 {
-    this->initializeSnake();
-    this->setRandomSeed();
-}
-
-void Snake::setRandomSeed()
-{
+    for (int i = 0; i < this->mInitialSnakeLength; i ++)
+    {
+        this->mSnake.push_back(SnakeBody(x, y + i));
+    }
+    this->mDirection = Direction::Up;
     // use current time as seed for random generator
     std::srand(std::time(nullptr));
 }
 
-void Snake::initializeSnake()
-{
-    // Instead of using a random initialization algorithm
-    // We always put the snake at the center of the game mWindows
-    int centerX = this->mGameBoardWidth / 2;
-    int centerY = this->mGameBoardHeight / 2;
-
-    for (int i = 0; i < this->mInitialSnakeLength; i ++)
-    {
-        this->mSnake.push_back(SnakeBody(centerX, centerY + i));
-    }
-    this->mDirection = Direction::Up;
-}
 
 bool Snake::isPartOfSnake(int x, int y)
 {
     SnakeBody temp(x, y);
     for(SnakeBody& body: mSnake){
         if(body == temp) return true;
-    }
-    return false;
-}
-
-/*
- * Assumption:
- * Only the head would hit wall.
- */
-bool Snake::hitWall()
-{
-    int x = mSnake[0].getX(), y = mSnake[0].getY();
-    if(x >= mGameBoardWidth || x <= 0 || y >= mGameBoardHeight || y <= 0) return true;
-    return false;
-}
-
-/*
- * The snake head is overlapping with its body
- */
-bool Snake::hitSelf()
-{
-    for(int i = 1; i < mSnake.size(); i++){
-        if(mSnake[i] == mSnake[0]) return true;
-    }
-    return false;
-}
-
-bool Snake::hitOthers(Snake* s)
-{
-    if(s == this) return false;
-    std::vector<SnakeBody>& snake = s->getSnake();
-    for(int i = 0; i < mSnake.size(); i++){
-        if(mSnake[i] == snake[0]) return true;
     }
     return false;
 }
